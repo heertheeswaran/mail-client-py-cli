@@ -1,0 +1,37 @@
+[
+  {
+    "from": {
+      "operation": "contains",
+      "value": "test"
+    },
+    "to": {
+      "operation": "contains",
+      "value": "test"
+    },
+    "cc": {
+      "operation": "contains",
+      "value": "test"
+    },
+    "subject": {
+      "operation": "contains",
+      "value": "apple"
+    },
+    "date": {
+      "operation": "less_than",
+      "value": "1",
+      "unit": "days"
+    },
+    "any_or_all": "any"
+  },
+  {
+    "from": {
+      "operation": "equals",
+      "value": "heertheesh1996@gmail.com"
+    },
+    "subject": {
+      "operation": "contains",
+      "value": "New"
+    },
+    "any_or_all": "all"
+  }
+]

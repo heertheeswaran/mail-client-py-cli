@@ -1,0 +1,34 @@
+{
+  "fields": [
+    {
+      "name": "From",
+      "key": "mail_from",
+      "filter_key": "from",
+      "type": "email"
+    },
+    {
+      "name": "To",
+      "key": "mail_to",
+      "filter_key": "to",
+      "type": "email"
+    },
+    {
+      "name": "Subject",
+      "key": "mail_subject",
+      "filter_key": "subject",
+      "type": "string"
+    },
+    {
+      "name": "Received",
+      "key": "mail_date",
+      "filter_key": "date",
+      "type": "date"
+    },
+    {
+      "name": "Cc",
+      "key": "cc",
+      "filter_key": "cc",
+      "type": "email"
+    }
+  ]
+}
