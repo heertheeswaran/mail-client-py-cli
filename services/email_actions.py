@@ -4,6 +4,7 @@ from dateutil import tz
 from datetime import timedelta, datetime
 from googleapiclient.discovery import build
 from lib.google_api_batch_request import GmailBatchRequest
+from lib.google_api import GmailApi
 
 class EmailActions:
   def __init__(self, rule: dict, emails: any, creds: any) -> None:
@@ -100,6 +101,7 @@ class EmailActions:
   def mark_as_read(self):
     service = build('gmail', 'v1', credentials=self.creds)
     requests = []
+    # Wrote this as a batch request, as this is faster than making a request for each email
     for mail_id in self.filtered_emails:
       requests.append(
         service.users().messages().modify(userId='me', id=mail_id, body={'removeLabelIds': ['UNREAD']})
@@ -107,34 +109,21 @@ class EmailActions:
     GmailBatchRequest(service, self.creds, self.callback).execute(requests)
 
   def mark_as_unread(self):
-    service = build('gmail', 'v1', credentials=self.creds)
-    requests = []
+    # Using gmail rest api to mark as unread
     for mail_id in self.filtered_emails:
-      requests.append(
-        service.users().messages().modify(userId='me', id=mail_id, body={'addLabelIds': ['UNREAD']})
-      )
-    GmailBatchRequest(service, self.creds, self.callback).execute(requests)
+      response = GmailApi(self.creds).modify_message(mail_id, ['UNREAD'], [])
+      print(response)
 
   def move(self, folder: dict):
-    service = build('gmail', 'v1', credentials=self.creds)
-    requests = []
+    # Using gmail rest api to move to a folder
     for mail_id in self.filtered_emails:
-      mail = list(filter(lambda x: x.id == mail_id, self.emails))[0]
+      filtered_mail = list(filter(lambda x: x.id == mail_id, self.emails))[0]
       add_labels = [folder['id']]
-      remove_labels = mail.labels.split(',')
+      remove_labels = filtered_mail.labels.split(',')
       if folder['id'] in remove_labels:
         remove_labels.remove(folder['id'])
-      requests.append(
-        service.users().messages().modify(
-          userId='me',
-          id=mail_id,
-          body={
-            'addLabelIds': add_labels,
-            'removeLabelIds': remove_labels
-          }
-        )
-      )
-    GmailBatchRequest(service, self.creds, self.callback).execute(requests)
+      response = GmailApi(self.creds).modify_message(filtered_mail.id, add_labels, remove_labels)
+      print(response)
 
   def callback(self, _request_id, response, _exception):
     print(response)
