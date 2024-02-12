@@ -22,10 +22,6 @@ def cli():
   pass
 
 @click.command()
-def auth():
-  pass
-
-@click.command()
 @click.option('--count', default=100, help='Number of emails to fetch')
 @coro
 async def collect(count):
@@ -85,7 +81,6 @@ async def action():
     return
 
 cli.add_command(collect)
-cli.add_command(auth)
 cli.add_command(action)
 if __name__ == '__main__':
   cli()
