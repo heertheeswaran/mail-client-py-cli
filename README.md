@@ -61,7 +61,7 @@ The tool prompts you to choose a rule to filter emails. After selecting a rule, 
 
 ### Rules
 
-You can customize rules for email actions. Modify the `config/rules` file to define rules based on your criteria.
+You can customize rules for email actions. Modify the `config/rules.json` file to define rules based on your criteria.
 
 ### Running the CLI
 
@@ -74,11 +74,3 @@ python cli.py
 ## Disclaimer
 
 This tool is designed for managing emails programmatically. Ensure that you understand the actions being performed, especially when moving emails or marking them as read/unread, as these actions are irreversible.
-
-## Contributions
-
-Feel free to contribute to the project by submitting bug reports, feature requests, or pull requests. Your feedback is valuable in enhancing the functionality and usability of the tool.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
