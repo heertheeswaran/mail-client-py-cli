@@ -1,6 +1,6 @@
 # Email Management CLI
 
-This is a command-line interface (CLI) tool for managing and performing actions on emails. The tool is built using Python and asyncio, leveraging the Prisma library for database interactions.
+This is a command-line interface (CLI) tool for managing and performing actions on emails. The tool is built using Python, leveraging the Prisma library for database interactions and click for the command line integration.
 
 ## Installation
 
